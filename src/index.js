@@ -1,12 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const Page = () => {
+    let schema = Yup.object().shape({
+        city: Yup.string()
+                .required()
+                .min(2, 'Too short')
+                .trim()
+    });
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+    return (
+        <div>
+            <h1>Find weather</h1>
+            <Formik
+                initialValues = {{city: ''}}
+                validationSchema = {schema}
+                onSubmit = {value => {
+                    console.log(value);
+                }}
+            >
+                {({ errors, touched}) => (
+                    <Form>
+                        <Field name="city" />
+                        {errors.city && touched.city && <div>{errors.city}</div>}
+
+                        <button type="submit">Submit</button>
+                    </Form>
+                )}
+            </Formik>
+        </div>
+    );
+}
+
+ReactDOM.render(<Page />, document.getElementById('root'));
+
