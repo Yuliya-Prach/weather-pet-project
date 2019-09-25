@@ -1,8 +1,8 @@
 import React from 'react';
 import {Box} from "@material-ui/core/index";
 import Grid from '@material-ui/core/Grid/index';
-import {WeatherPaper} from '../WeatherPaper/WeatherPaper';
 import { makeStyles } from '@material-ui/styles';
+import {WeatherPaper} from '../WeatherPaper/WeatherPaper';
 
 const useStyles = makeStyles({
    box: {
@@ -13,15 +13,12 @@ const useStyles = makeStyles({
    }
 });
 
-const transformTemp = (temp) => {
-    let kelvin = 273.15;
-    return Math.round((temp - kelvin) * 10)/10;
-};
+export const transformTemp = (temp) => Math.round((temp - 273.15) * 10)/10;
 
 export const CurrentWeather = (props) => {
-    let styles = useStyles();
-    let {name, main, wind} = props.data;
-    let icon = props.icon;
+    const styles = useStyles();
+    const {name, main, wind} = props.data;
+    const icon = props.icon;
     return (
             <Box m={3} className={styles.box} p={3}>
                 <Grid container spacing={3} justify="space-evenly">

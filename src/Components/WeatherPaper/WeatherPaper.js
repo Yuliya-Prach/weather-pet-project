@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 });
 
 export const WeatherPaper = ({title, value, unit}) => {
-    let styles = useStyles();
+    const styles = useStyles();
     return (
         <Grid item sm={3} lg={4}>
             <Paper>

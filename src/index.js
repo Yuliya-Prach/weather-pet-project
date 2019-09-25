@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {Formik, Form, Field} from 'formik';
 import * as Yup from 'yup';
+import Grid from '@material-ui/core/Grid';
 import {getCurrentWeather, getWeatherIcon} from './Services/DataService';
 import {CurrentWeather} from "./Components/CurrentWeather/CurrentWeather";
-import Grid from '@material-ui/core/Grid';
 
 const Page = () => {
     const [weather, setWeather] = useState(null);
     const [icon, setIcon] = useState(null);
-    let schema = Yup.object().shape({
+    const schema = Yup.object().shape({
         city: Yup.string()
             .required()
             .min(2, 'Too short')
