@@ -2,6 +2,7 @@ import React from 'react';
 import {Box} from "@material-ui/core/index";
 import Grid from '@material-ui/core/Grid/index';
 import { makeStyles } from '@material-ui/styles';
+import {connect} from "react-redux";
 import {WeatherPaper} from '../WeatherPaper/WeatherPaper';
 
 const useStyles = makeStyles({
@@ -15,7 +16,14 @@ const useStyles = makeStyles({
 
 export const transformTemp = (temp) => Math.round((temp - 273.15) * 10)/10;
 
+connect((store)=> {
+    return {
+        weather: store.weather,
+        icon: store.icon
+    };
+});
 export const CurrentWeather = (props) => {
+    console.log(props);
     const styles = useStyles();
     const {name, main, wind} = props.data;
     const icon = props.icon;
